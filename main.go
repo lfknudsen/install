@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+
+	"github.com/hymkor/trash-go"
 )
 
 func main() {
@@ -20,9 +22,15 @@ func main() {
 
 	for _, filename := range os.Args[1:] {
 		filename = filepath.Base(filename)
-		err = os.Rename(filename, filepath.Join(installLocation, filename))
+		dst := filepath.Join(installLocation, filename)
+		err = trash.Throw(dst)
 		if err != nil {
-			fmt.Println(err)
+			_, _ = fmt.Fprintln(os.Stderr, err)
+			continue
+		}
+		err = os.Rename(filename, dst)
+		if err != nil {
+			_, _ = fmt.Fprintln(os.Stderr, err)
 		}
 	}
 }
