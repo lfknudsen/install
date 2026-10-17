@@ -7,8 +7,11 @@ and then whenever you compile a programme you wish to add to your PATH, you can
 simply execute
 
 ```
-install <file name(s)...>
+install [<file name(s)...>]
 ```
+
+If a file-name is omitted, the programme will look for a file with the same
+name as the current working directory (with either .exe or no extension).
 
 ### Setup
 
