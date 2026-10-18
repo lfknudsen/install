@@ -37,8 +37,8 @@ func findBinary() string {
 }
 
 func install(filename string, installLocation string) {
-	filename = filepath.Base(filename)
-	dst := filepath.Join(installLocation, filename)
+	base := filepath.Base(filename)
+	dst := filepath.Join(installLocation, base)
 	err := trash.Throw(dst)
 	if err != nil {
 		_, _ = fmt.Fprintln(os.Stderr, err)
